@@ -1,12 +1,12 @@
 <mat-grid-list cols="5" rowHeight="4:2">
 
-  <mat-grid-tile [colspan]="5" >
+  <mat-grid-tile [colspan]="5">
     <h1><strong>My</strong>Studio</h1>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="1" [rowspan]="4">
-
-    <mat-card>Gerenciar Artista</mat-card>
-
+    <div class="container">
+      <app-side-bar></app-side-bar>
+    </div>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="4" [rowspan]="4"><router-outlet></router-outlet></mat-grid-tile>
 
