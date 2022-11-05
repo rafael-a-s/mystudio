@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './layout/header/header.component';
 import { SideBarComponent } from './layout/side-bar/side-bar.component';
 import { AppMaterialModule } from './shared/app-material/app-material.module';
 
@@ -13,6 +14,7 @@ import { AppMaterialModule } from './shared/app-material/app-material.module';
   declarations: [
     AppComponent,
     SideBarComponent,
+    HeaderComponent,
 
   ],
   imports: [
