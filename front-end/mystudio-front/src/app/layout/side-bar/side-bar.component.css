@@ -8,15 +8,16 @@
   flex-direction: column;
 
   background: #1f283e;
-  opacity: .7;
+
 
 }
 /*===Title===*/
 .wrapper div {
-  width: auto;
+  width: 100%;
   height: 25%;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .wrapper div h1{
   color: #a9afbbd1;
@@ -24,7 +25,7 @@
 }
 /*===Nav===*/
 .wrapper nav{
-  width: auto;
+  width: 100%;
   height: 75%;
   display: flex;
   align-items: center;
@@ -32,25 +33,42 @@
   gap: 2rem;
 
 }
-.wrapper nav section a{
-  text-decoration: none;
-  text-align: center;
-  display: block;
-  width: 18rem;
-  height: 2rem;
-  border-radius: .25rem;
-  color: rgba(183, 177, 168, 0.82);
-  font-size: 1.5rem;
-  font-weight: 300;
-  padding: 10px 15px;
-  transition: all .15s ease-in,color,0ms;
+.wrapper nav ul{
+  width: 100%;
+  height: 100%;
+}
+.wrapper nav ul li{
+  list-style: none;
+  width: 100%;
+  height: auto;
+  display: flex;
 
 }
-.wrapper nav section a.active{
+
+.wrapper nav ul li a{
+  background-color: #1f283e;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 1.5rem;
+
+  text-decoration: none;
+  text-align: center;
+  color: rgba(183, 177, 168, 0.82);
+  margin: 15px 5px 0;
+  border-radius: 3px;
+  padding: 10px 15px;
+  min-width: 14rem;
+  min-height: 2.5rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+.wrapper nav ul li a.active{
   background: linear-gradient(60deg,#7b1fa2,#913f9e);
 }
-.wrapper nav section a:hover{
-  background: #1f283e;
-  opacity: .7;
+.wrapper nav ul li a:hover{
+  background: linear-gradient(60deg,#7b1fa2,#913f9e);
+  opacity: .9;
 }
 

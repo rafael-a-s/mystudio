@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SideBarComponent } from './layout/side-bar/side-bar.component';
+import { AppMaterialModule } from './shared/app-material/app-material.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SideBarComponent } from './layout/side-bar/side-bar.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatGridListModule,
-    MatCardModule
+    MatCardModule,
+    AppMaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
