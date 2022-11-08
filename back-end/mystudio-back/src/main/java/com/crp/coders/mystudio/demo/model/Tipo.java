@@ -12,4 +12,14 @@ public enum Tipo {
         this.id = id;
         this.label = label;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    
 }
