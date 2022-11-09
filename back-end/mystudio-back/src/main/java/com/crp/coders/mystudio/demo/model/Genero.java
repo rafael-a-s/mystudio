@@ -4,12 +4,14 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Genero extends DefaultEntity implements Serializable {
     
     private static final long serialVersionUID = 1L;
 
+    @NotBlank(message = "O nome deve ser preenchido.")
     @Column(length = 15)
     private String nome;
 

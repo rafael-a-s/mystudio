@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 
 
 
@@ -16,6 +17,7 @@ public class Album extends DefaultEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @NotBlank(message = "O nome deve ser preenchido.")
     @Column(length = 30)
     private String nome;
 

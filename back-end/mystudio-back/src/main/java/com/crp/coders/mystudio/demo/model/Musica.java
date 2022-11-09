@@ -11,12 +11,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Musica extends DefaultEntity implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
+    @NotBlank(message = "O nome deve ser preenchido.")
     @Column(length = 50)
     private String nome;
 
@@ -25,9 +28,11 @@ public class Musica extends DefaultEntity implements Serializable{
                                    inverseJoinColumns = {@JoinColumn(name="artista_id")})
     private List<Artista> artistas;
 
+    @NotBlank(message = "A duração deve ser preenchido.")
     @Column(length = 10)
     private Double duracao;
 
+    @NotNull
     @ManyToOne(optional = true)
     @JoinColumn
     private Genero genero;

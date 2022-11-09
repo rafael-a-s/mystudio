@@ -11,18 +11,22 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 public class Artista extends DefaultEntity implements Serializable{
     
     private static final long serialVersionUID = 1L;
-
+    
+    @NotBlank(message = "O nome deve ser preenchido.")
     @Column(length = 50)
     private String nome;
 
     @Enumerated(EnumType.ORDINAL)
     private Sexo sexo;
 
+    @NotNull
     @OneToMany(cascade = CascadeType.ALL)
     private List<String> tipos;
 

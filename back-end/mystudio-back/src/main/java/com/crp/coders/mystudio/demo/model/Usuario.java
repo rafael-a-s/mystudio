@@ -4,17 +4,21 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Usuario extends DefaultEntity implements Serializable{
     private static final long serialVersionUID = 1L;
 
+    @NotBlank(message = "O nome deve ser preenchido.")
     @Column(length = 50)
     private String nome;
 
+    @NotBlank(message = "O email deve ser preenchido.")
     @Column(length = 50)
     private String email;
 
+    @NotBlank(message = "A senha deve ser preenchido.")
     @Column(length = 8)
     private String senha;
 
