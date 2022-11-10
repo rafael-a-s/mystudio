@@ -6,5 +6,6 @@ import com.crp.coders.mystudio.demo.model.Usuario;
 
 @Repository
 public interface UsuarioRepository extends CrudRepository<Usuario, Integer>{
+     
     
 }
