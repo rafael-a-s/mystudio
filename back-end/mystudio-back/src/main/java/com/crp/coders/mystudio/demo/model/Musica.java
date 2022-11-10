@@ -22,15 +22,17 @@ public class Musica extends DefaultEntity implements Serializable{
     @NotBlank(message = "O nome deve ser preenchido.")
     @Column(length = 50)
     private String nome;
+    private String anoLancamento;
+
+    @NotBlank(message = "A duração deve ser preenchido.")
+    @Column(length = 10)
+    private Double tempoDuracao;
+    private Album album;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="artista_has_musicas", joinColumns= {@JoinColumn(name="musica_id")},
                                    inverseJoinColumns = {@JoinColumn(name="artista_id")})
     private List<Artista> artistas;
-
-    @NotBlank(message = "A duração deve ser preenchido.")
-    @Column(length = 10)
-    private Double duracao;
 
     @NotNull
     @ManyToOne(optional = true)
@@ -45,22 +47,36 @@ public class Musica extends DefaultEntity implements Serializable{
         this.nome = nome;
     }
 
+    public String getAnoLancamento() {
+        return anoLancamento;
+    }
+
+    public void setAnoLancamento(String anoLancamento) {
+        this.anoLancamento = anoLancamento;
+    }
+
+    public Double getTempoDuracao() {
+        return tempoDuracao;
+    }
+
+    public void setTempoDuracao(Double tempoDuracao) {
+        this.tempoDuracao = tempoDuracao;
+    }
+
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
+    }
+
     public List<Artista> getArtistas() {
-        if(this.artistas == null)
-            this.artistas = new ArrayList<Artista>();
         return artistas;
     }
 
     public void setArtistas(List<Artista> artistas) {
         this.artistas = artistas;
-    }
-
-    public Double getDuracao() {
-        return duracao;
-    }
-
-    public void setDuracao(Double duracao) {
-        this.duracao = duracao;
     }
 
     public Genero getGenero() {
@@ -71,7 +87,4 @@ public class Musica extends DefaultEntity implements Serializable{
         this.genero = genero;
     }
 
-    
-    
-    
 }

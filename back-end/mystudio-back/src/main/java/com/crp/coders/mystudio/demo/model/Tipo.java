@@ -1,9 +1,9 @@
 package com.crp.coders.mystudio.demo.model;
 
 public enum Tipo {
-    AUTOR(1,"Autor"),
-    INTERPRETE(2,"Interprete"),
-    CANTOR(3,"Cantor");
+    Compositor(1,"Compositor"),
+    Cantor(2,"Cantor"),
+    Letrista(3,"Letristra");
 
     private Integer id;
     private String label;

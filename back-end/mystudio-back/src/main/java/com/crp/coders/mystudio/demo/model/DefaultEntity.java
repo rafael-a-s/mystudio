@@ -56,7 +56,4 @@ public class DefaultEntity {
         return true;
     }
 
-
-    
-
 }

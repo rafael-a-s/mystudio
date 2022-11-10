@@ -14,15 +14,20 @@ public class Nacionalidade extends DefaultEntity implements Serializable{
     
     @NotBlank(message = "O nome deve ser preenchido.")
     @Column(length = 20)
-    private String nome;
+    private String designacao;
+    private String siglaPais;
 
-    public String getNome() {
-        return nome;
+    public String getDesignacao() {
+        return designacao;
     }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setDesignacao(String designacao) {
+        this.designacao = designacao;
     }
-
+    public String getSiglaPais() {
+        return siglaPais;
+    }
+    public void setSiglaPais(String siglaPais) {
+        this.siglaPais = siglaPais;
+    }
     
 }

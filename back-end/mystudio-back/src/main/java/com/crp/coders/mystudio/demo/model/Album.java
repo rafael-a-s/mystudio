@@ -10,8 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
-
-
 @Entity
 public class Album extends DefaultEntity implements Serializable {
 
@@ -22,10 +20,15 @@ public class Album extends DefaultEntity implements Serializable {
     private String nome;
 
     @Column
-    private String capaUrl;
+    private String anoLancamento;
+    
+    @Column
+    private String tempoTotalDur;
 
     @OneToMany(targetEntity = com.crp.coders.mystudio.demo.model.Musica.class, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Musica> musicas;
+
+    private List<Artista> artistas;
 
     public String getNome() {
         return nome;
@@ -35,17 +38,23 @@ public class Album extends DefaultEntity implements Serializable {
         this.nome = nome;
     }
 
-    public String getCapaUrl() {
-        return capaUrl;
+    public String getAnoLancamento() {
+        return anoLancamento;
     }
 
-    public void setCapaUrl(String capaUrl) {
-        this.capaUrl = capaUrl;
+    public void setAnoLancamento(String anoLancamento) {
+        this.anoLancamento = anoLancamento;
+    }
+
+    public String getTempoTotalDur() {
+        return tempoTotalDur;
+    }
+
+    public void setTempoTotalDur(String tempoTotalDur) {
+        this.tempoTotalDur = tempoTotalDur;
     }
 
     public List<Musica> getMusicas() {
-        if(this.musicas == null)
-            this.musicas = new ArrayList<Musica>();
         return musicas;
     }
 
@@ -53,7 +62,13 @@ public class Album extends DefaultEntity implements Serializable {
         this.musicas = musicas;
     }
 
-    
+    public List<Artista> getArtistas() {
+        return artistas;
+    }
+
+    public void setArtistas(List<Artista> artistas) {
+        this.artistas = artistas;
+    }
 
     
 }
