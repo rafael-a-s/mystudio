@@ -42,6 +42,4 @@ public class Usuario extends DefaultEntity implements Serializable{
         this.senha = senha;
     }
     
-    
-
 }
