@@ -1,0 +1,42 @@
+<h1>Ola mundo</h1>
+
+<mat-table  [dataSource]="user" >
+
+
+
+  <ng-container matColumnDef="nome">
+    <mat-header-cell  *matHeaderCellDef> Nome </mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{ user.nome }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.email}}
+    </mat-cell>
+  </ng-container>
+  <!-- Name Column -->
+
+  <ng-container matColumnDef="acoes" >
+    <mat-header-cell *matHeaderCellDef class="action-column-header">
+      <button mat-mini-fab color="primary" aria-label="adcionar um curso">
+        <mat-icon (click)="onAdd()">add</mat-icon>
+      </button>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let user" class="action-column" >
+      <button mat-icon-button color="accent" aria-label="editar um curso">
+        <mat-icon (click)="onEdit(user)">edit</mat-icon>
+      </button>
+
+      <button mat-icon-button color="warn" aria-label="deletar um curso">
+        <mat-icon (click)="onDelete(user)" >delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+
+
+
+
+  <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

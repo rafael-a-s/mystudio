@@ -8,6 +8,12 @@
       <app-side-bar></app-side-bar>
     </div>
   </mat-grid-tile>
-  <mat-grid-tile [colspan]="4" [rowspan]="4"><router-outlet></router-outlet></mat-grid-tile>
+  <mat-grid-tile [colspan]="4" [rowspan]="4">
+    <div class="wrapper">
+      <router-outlet>
+
+      </router-outlet>
+    </div>
+  </mat-grid-tile>
 
 </mat-grid-list>
