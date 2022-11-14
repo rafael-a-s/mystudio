@@ -35,5 +35,8 @@ public class DefaultEntity implements Serializable {
     private Integer version;
 
     private boolean active = true;
+
+
+    
     
 }

@@ -1,6 +1,7 @@
 package br.com.crp.mystudio.domain.model.artista;
 
 import br.com.crp.mystudio.domain.DefaultEntity;
+import br.com.crp.mystudio.rest.dto.album.CreateAlbumDTO;
 
 import java.io.Serial;
 import java.util.List;
@@ -40,4 +41,10 @@ public class Album extends DefaultEntity{
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Musica> musicas;
+
+    public Album(CreateAlbumDTO dto){
+        this.nome = dto.nome();
+        this.anoLancamento = dto.anoLancamento();
+        this.tempoTotalDur = dto.tempoTotalDur();
+    }
 }

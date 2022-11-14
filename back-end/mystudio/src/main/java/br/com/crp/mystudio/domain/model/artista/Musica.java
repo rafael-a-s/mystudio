@@ -1,6 +1,8 @@
 package br.com.crp.mystudio.domain.model.artista;
 
 import br.com.crp.mystudio.domain.DefaultEntity;
+import br.com.crp.mystudio.rest.dto.musica.CreateMusicaDTO;
+
 import java.io.Serial;
 import java.util.List;
 
@@ -41,4 +43,9 @@ public class Musica extends DefaultEntity {
     @OneToOne
     private Genero genero;
 
+    public Musica(CreateMusicaDTO dto ){
+        this.nome = dto.nome();
+        this.anoLancamento = dto.anoLancamento();
+        this.tempoDuracao = dto.tempoDuracao();
+    }
 }

@@ -3,6 +3,7 @@ package br.com.crp.mystudio.domain.model.usuario;
 import java.io.Serial;
 
 import br.com.crp.mystudio.domain.DefaultEntity;
+import br.com.crp.mystudio.rest.dto.CreateUsuarioDTO;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -32,5 +33,10 @@ public class Usuario extends DefaultEntity{
     @NotBlank
     private String senha;
 
+    public Usuario(CreateUsuarioDTO dto){
+        this.nome = dto.nome();
+        this.email = dto.email();
+        this.senha = dto.senha();
+    }
 
 }

@@ -1,5 +1,6 @@
 package br.com.crp.mystudio.rest.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,9 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import br.com.crp.mystudio.domain.model.artista.Musica;
 import br.com.crp.mystudio.domain.repository.MusicaRepository;
+import br.com.crp.mystudio.rest.dto.album.UpdateAlbumDTO;
+import br.com.crp.mystudio.rest.dto.musica.CreateMusicaDTO;
+import br.com.crp.mystudio.rest.dto.musica.ResponseMuiscaDTO;
+import br.com.crp.mystudio.rest.dto.musica.UpdateMusicaDTO;
 
 @RestController
 @RequestMapping("api/musica")
@@ -26,21 +32,27 @@ public class MusicaController {
     private MusicaRepository repository;
 
     @GetMapping
-    public @ResponseBody List<Musica> list(){
-        return repository.findAll();
+    public List<ResponseMuiscaDTO> list(){
+        List<Musica> list = repository.findAllActive();
+        List<ResponseMuiscaDTO> listResponse = new ArrayList<ResponseMuiscaDTO>();
+        for(Musica m : list){
+            ResponseMuiscaDTO response = new ResponseMuiscaDTO(m.getId(),m.getNome(), m.getAnoLancamento(), m.getTempoDuracao());
+            listResponse.add(response);
+        }
+        return listResponse;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Musica> findById(@PathVariable("id") Long id){
+    public ResponseEntity<ResponseMuiscaDTO> findById(@PathVariable Long id){
         return repository.findById(id)
-        .map(musicaEncontrado -> ResponseEntity.ok().body(musicaEncontrado))
+        .map(art -> ResponseEntity.ok().body(new ResponseMuiscaDTO(art.getId(),art.getNome(), art.getAnoLancamento(), art.getTempoDuracao())))
         .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    @ResponseStatus(code = HttpStatus.CREATED)//retorna o status de criação
-    public void cadastrar(@RequestBody Musica musica){
-        repository.save(musica);   
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public void saveEntity(@RequestBody CreateMusicaDTO userDTO){
+        repository.save(new Musica(userDTO));
     }
 
     @DeleteMapping("/{id}")
@@ -52,4 +64,16 @@ public class MusicaController {
         }
         System.out.println("Registo não encontrado.");
     }  
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UpdateMusicaDTO> editUser(@PathVariable("id") Long id, @RequestBody UpdateMusicaDTO musicaDTO){
+
+            Optional<Musica> m = repository.findById(id);
+            m.get().setNome(musicaDTO.nome());
+            m.get().setTempoDuracao(musicaDTO.tempoDuracao());
+            Musica mscUpdated = repository.save(m.get());
+            if(mscUpdated != null)
+                return ResponseEntity.ok().body(musicaDTO = new UpdateMusicaDTO(mscUpdated.getNome(), mscUpdated.getTempoDuracao()));
+            return ResponseEntity.notFound().build();
+    }
 }

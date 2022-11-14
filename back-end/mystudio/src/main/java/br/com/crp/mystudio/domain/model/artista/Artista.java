@@ -1,6 +1,7 @@
 package br.com.crp.mystudio.domain.model.artista;
 
 import br.com.crp.mystudio.domain.DefaultEntity;
+import br.com.crp.mystudio.rest.dto.artista.CreateArtistaDTO;
 
 import java.io.Serial;
 
@@ -49,4 +50,14 @@ public class Artista extends DefaultEntity {
 
     @OneToOne
     private Nacionalidade nacionalidade;
+
+
+    public Artista(CreateArtistaDTO dto){
+        this.nome = dto.nome();
+        this.dataNascimento = dto.dataNascimento();
+        this.email = dto.email();
+        this.sexo = dto.sexo();
+        this.tipoArtista = dto.tipoArtista();
+    }
 }
+
