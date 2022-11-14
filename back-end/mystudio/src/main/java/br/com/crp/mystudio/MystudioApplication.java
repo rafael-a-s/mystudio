@@ -1,6 +1,5 @@
 package br.com.crp.mystudio;
 
-import java.util.Optional;
 
 
 import org.springframework.boot.SpringApplication;
@@ -14,7 +13,7 @@ public class MystudioApplication {
 		SpringApplication.run(MystudioApplication.class, args);
 	}
 
-	
+
 
 
 	

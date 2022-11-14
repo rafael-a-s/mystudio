@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.crp.mystudio.domain.model.artista.Artista;
+import br.com.crp.mystudio.domain.model.artista.Nacionalidade;
 import br.com.crp.mystudio.domain.repository.ArtistaRepository;
+import br.com.crp.mystudio.domain.repository.NacionalidadeRepository;
 import br.com.crp.mystudio.rest.dto.artista.CreateArtistaDTO;
 import br.com.crp.mystudio.rest.dto.artista.ResponseArtistaDTO;
 import br.com.crp.mystudio.rest.dto.artista.UpdateArtistaDTO;
@@ -37,7 +39,7 @@ public class ArtistaController {
         List<ResponseArtistaDTO> listResponse = new ArrayList<ResponseArtistaDTO>();
         for(Artista art : list){
             ResponseArtistaDTO response = new ResponseArtistaDTO(art.getId(),art.getNome(), art.getEmail(),
-            art.getSexo(), art.getTipoArtista());
+            art.getSexo(), art.getTipoArtista(), art.getNacionalidade());
             listResponse.add(response);
         }
         return listResponse;
@@ -46,7 +48,7 @@ public class ArtistaController {
     @GetMapping("/{id}")
     public ResponseEntity<ResponseArtistaDTO> findById(@PathVariable Long id){
         return repository.findById(id)
-        .map(art -> ResponseEntity.ok().body(new ResponseArtistaDTO(art.getId(),art.getNome(), art.getEmail(), art.getSexo(), art.getTipoArtista())))
+        .map(art -> ResponseEntity.ok().body(new ResponseArtistaDTO(art.getId(),art.getNome(), art.getEmail(), art.getSexo(), art.getTipoArtista(), art.getNacionalidade())))
         .orElse(ResponseEntity.notFound().build());
     }
 
@@ -57,7 +59,7 @@ public class ArtistaController {
         List<ResponseArtistaDTO> listResponse = new ArrayList<ResponseArtistaDTO>();
         for(Artista art : list){
             ResponseArtistaDTO response = new ResponseArtistaDTO(art.getId(),art.getNome(), art.getEmail(),
-            art.getSexo(), art.getTipoArtista());
+            art.getSexo(), art.getTipoArtista(), art.getNacionalidade());
             listResponse.add(response);
         }
         return listResponse;
@@ -66,7 +68,9 @@ public class ArtistaController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public void saveEntity(@RequestBody CreateArtistaDTO artDTO){
-        repository.save(new Artista(artDTO));
+        
+        repository.save(new Artista(artDTO ));
+        
     } 
     
     @DeleteMapping("/{id}")

@@ -7,5 +7,6 @@ import br.com.crp.mystudio.domain.model.artista.Nacionalidade;
 
 @Repository
 public interface NacionalidadeRepository extends JpaRepository<Nacionalidade, Long> {
-    
+
+   
 }

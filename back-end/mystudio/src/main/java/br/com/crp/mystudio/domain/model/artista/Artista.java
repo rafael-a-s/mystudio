@@ -1,10 +1,12 @@
 package br.com.crp.mystudio.domain.model.artista;
 
 import br.com.crp.mystudio.domain.DefaultEntity;
+import br.com.crp.mystudio.domain.repository.NacionalidadeRepository;
 import br.com.crp.mystudio.rest.dto.artista.CreateArtistaDTO;
+import br.com.crp.mystudio.service.NacionalidadeService;
 
 import java.io.Serial;
-
+import java.util.Optional;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -58,6 +60,9 @@ public class Artista extends DefaultEntity {
         this.email = dto.email();
         this.sexo = dto.sexo();
         this.tipoArtista = dto.tipoArtista();
+        this.nacionalidade = dto.nacionalidade();
+      
     }
+   
 }
 

@@ -17,6 +17,4 @@ public interface MusicaRepository extends JpaRepository<Musica, Long> {
     @Query("SELECT m FROM Musica m WHERE m.nome LIKE %:nome%")
     public List<Musica> findAllName(String nome);
 
-    @Query("SELECT m FROM Musica m WHERE m.artistas.id = :id")
-    public List<Musica> findAllNameByArtista(Long id);
 }

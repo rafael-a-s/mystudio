@@ -1,11 +1,13 @@
 package br.com.crp.mystudio.domain.model.artista;
 
 import br.com.crp.mystudio.domain.DefaultEntity;
+import br.com.crp.mystudio.domain.repository.NacionalidadeRepository;
 
 import java.io.Serial;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,21 +16,25 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 
-@EqualsAndHashCode(callSuper = true)
+
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-@SuperBuilder
 @Entity
-public class Nacionalidade extends DefaultEntity{
+public class Nacionalidade  {
     
-    @Serial
-    private static final long serialVersionUID = 1L;
+    @Id
+    private Long id;
     
-    @NotBlank
+  
     private String designacao;
 
-    @NotBlank
+    
     private String siglaPais;
+
+    public Nacionalidade(){
+        
+    }
+
+    
 
 }
