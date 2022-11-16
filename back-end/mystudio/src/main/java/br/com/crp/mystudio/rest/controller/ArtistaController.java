@@ -34,7 +34,7 @@ public class ArtistaController {
     private ArtistaRepository repository;
 
     @GetMapping
-    public List<ResponseArtistaDTO> list(){
+    public List<ResponseArtistaDTO> list(){//funcionando
         List<Artista> list = repository.findAllActive();
         List<ResponseArtistaDTO> listResponse = new ArrayList<ResponseArtistaDTO>();
         for(Artista art : list){
@@ -45,7 +45,7 @@ public class ArtistaController {
         return listResponse;
     }
     
-    @GetMapping("/{id}")
+    @GetMapping("/{id}")//funcionando
     public ResponseEntity<ResponseArtistaDTO> findById(@PathVariable Long id){
         return repository.findById(id)
         .map(art -> ResponseEntity.ok().body(new ResponseArtistaDTO(art.getId(),art.getNome(), art.getEmail(), art.getSexo(), art.getTipoArtista(), art.getNacionalidade())))
@@ -53,7 +53,7 @@ public class ArtistaController {
     }
 
 
-    @GetMapping("/buscar/{nome}")
+    @GetMapping("/findByName-{nome}")//funcionando
     public List<ResponseArtistaDTO> findByNome(@PathVariable String nome){
         List<Artista> list = repository.findAllName(nome);
         List<ResponseArtistaDTO> listResponse = new ArrayList<ResponseArtistaDTO>();
@@ -66,7 +66,7 @@ public class ArtistaController {
     }
 
     @PostMapping
-    @ResponseStatus(code = HttpStatus.CREATED)
+    @ResponseStatus(code = HttpStatus.CREATED)//funcionando
     public void saveEntity(@RequestBody CreateArtistaDTO artDTO){
         
         repository.save(new Artista(artDTO ));

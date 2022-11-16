@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import br.com.crp.mystudio.domain.model.artista.Artista;
@@ -16,9 +17,10 @@ public interface ArtistaRepository extends JpaRepository<Artista, Long>{
     @Query("SELECT a FROM Artista a WHERE a.active = true ORDER  BY a.nome")
     public List<Artista> findAllActive();
 
-    @Query("SELECT a FROM Artista a WHERE a.nome LIKE %:nome%")
-    public List<Artista> findAllName(String nome);
+    @Query("SELECT a FROM Artista a WHERE UPPER(a.nome) LIKE CONCAT('%',UPPER(:nome),'%')")
+    public List<Artista> findAllName(@Param("nome") String nome);
 
+    List<Artista> findByNomeIgnoreCase(String nome);
    
 }
 
