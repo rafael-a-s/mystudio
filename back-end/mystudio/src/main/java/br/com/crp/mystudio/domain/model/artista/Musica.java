@@ -47,5 +47,6 @@ public class Musica extends DefaultEntity {
         this.nome = dto.nome();
         this.anoLancamento = dto.anoLancamento();
         this.tempoDuracao = dto.tempoDuracao();
+       
     }
 }

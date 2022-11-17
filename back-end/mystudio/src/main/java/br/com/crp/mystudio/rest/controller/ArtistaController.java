@@ -64,6 +64,17 @@ public class ArtistaController {
         }
         return listResponse;
     }
+    @GetMapping("/findByNacionalidade-{nacionalidade}")//funcionando
+    public List<ResponseArtistaDTO> findByArtistaForNacionalidade(@PathVariable String nacionalidade){
+        List<Artista> list = repository.findByArtistaForNacionalidade(nacionalidade);
+        List<ResponseArtistaDTO> listResponse = new ArrayList<ResponseArtistaDTO>();
+        for(Artista art : list){
+            ResponseArtistaDTO response = new ResponseArtistaDTO(art.getId(),art.getNome(), art.getEmail(),
+            art.getSexo(), art.getTipoArtista(), art.getNacionalidade());
+            listResponse.add(response);
+        }
+        return listResponse;
+    }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)//funcionando
@@ -73,7 +84,7 @@ public class ArtistaController {
         
     } 
     
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}")//Funcionando
     public void inativar(@PathVariable Long id){
         Optional<Artista> a = repository.findById(id);
         if(a.get() != null){
@@ -82,7 +93,7 @@ public class ArtistaController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}")//funcionando
     public ResponseEntity<UpdateArtistaDTO> editUser(@PathVariable("id") Long id, @RequestBody UpdateArtistaDTO artistaDTO){
 
             Optional<Artista> u = repository.findById(id);

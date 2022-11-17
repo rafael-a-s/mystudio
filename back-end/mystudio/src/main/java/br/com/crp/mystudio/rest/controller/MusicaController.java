@@ -24,6 +24,7 @@ import br.com.crp.mystudio.rest.dto.album.UpdateAlbumDTO;
 import br.com.crp.mystudio.rest.dto.musica.CreateMusicaDTO;
 import br.com.crp.mystudio.rest.dto.musica.ResponseMuiscaDTO;
 import br.com.crp.mystudio.rest.dto.musica.UpdateMusicaDTO;
+import br.com.crp.mystudio.service.MusicaService;
 
 @RestController
 @RequestMapping("api/musica")
@@ -31,31 +32,56 @@ public class MusicaController {
     @Autowired //Faz injeção de dependencia
     private MusicaRepository repository;
 
-    @GetMapping
+    @Autowired
+    private MusicaService service;
+
+    @GetMapping//funcionando
     public List<ResponseMuiscaDTO> list(){
         List<Musica> list = repository.findAllActive();
         List<ResponseMuiscaDTO> listResponse = new ArrayList<ResponseMuiscaDTO>();
         for(Musica m : list){
-            ResponseMuiscaDTO response = new ResponseMuiscaDTO(m.getId(),m.getNome(), m.getAnoLancamento(), m.getTempoDuracao());
+            ResponseMuiscaDTO response = service.convertMusicaToDTO(m);
             listResponse.add(response);
         }
         return listResponse;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}")//funcionando
     public ResponseEntity<ResponseMuiscaDTO> findById(@PathVariable Long id){
         return repository.findById(id)
-        .map(art -> ResponseEntity.ok().body(new ResponseMuiscaDTO(art.getId(),art.getNome(), art.getAnoLancamento(), art.getTempoDuracao())))
+        .map(art -> ResponseEntity.ok().body(service.convertMusicaToDTO(art)))
         .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    @ResponseStatus(code = HttpStatus.CREATED)
-    public void saveEntity(@RequestBody CreateMusicaDTO userDTO){
-        repository.save(new Musica(userDTO));
+    @GetMapping("/findByName-{nome}")//funcionando
+    public List<ResponseMuiscaDTO> findByName(@PathVariable String nome){
+        List<Musica> list = repository.findAllName(nome);
+        List<ResponseMuiscaDTO> listResponse = new ArrayList<ResponseMuiscaDTO>();
+        for(Musica m : list){
+            ResponseMuiscaDTO response = service.convertMusicaToDTO(m);
+            listResponse.add(response);
+        }
+        return listResponse;
     }
 
-    @DeleteMapping("/{id}")
+    @GetMapping("/findByArtista-{nome}")//funcionando
+    public List<ResponseMuiscaDTO> findByArtista(@PathVariable String nome){
+        List<Musica> list = repository.findAllName(nome);
+        List<ResponseMuiscaDTO> listResponse = new ArrayList<ResponseMuiscaDTO>();
+        for(Musica m : list){
+            ResponseMuiscaDTO response = service.convertMusicaToDTO(m);
+            listResponse.add(response);
+        }
+        return listResponse;
+    }
+
+    @PostMapping//funcionando
+    @ResponseStatus(code = HttpStatus.CREATED)//funcionando
+    public void saveEntity(@RequestBody CreateMusicaDTO musicaDTO){
+        repository.save(service.preencheRelacionamentos(musicaDTO));
+    }
+
+    @DeleteMapping("/{id}")//funcionando
     public void inativar(@PathVariable Long id){
         Optional<Musica> a = repository.findById(id);
         if(a.get() != null){
@@ -65,15 +91,15 @@ public class MusicaController {
         System.out.println("Registo não encontrado.");
     }  
 
-    @PutMapping("/{id}")
-    public ResponseEntity<UpdateMusicaDTO> editUser(@PathVariable("id") Long id, @RequestBody UpdateMusicaDTO musicaDTO){
+    @PutMapping("/{id}")//Funcionando 
+    public ResponseEntity<ResponseMuiscaDTO> editUser(@PathVariable("id") Long id, @RequestBody UpdateMusicaDTO musicaDTO){
 
             Optional<Musica> m = repository.findById(id);
             m.get().setNome(musicaDTO.nome());
             m.get().setTempoDuracao(musicaDTO.tempoDuracao());
             Musica mscUpdated = repository.save(m.get());
             if(mscUpdated != null)
-                return ResponseEntity.ok().body(musicaDTO = new UpdateMusicaDTO(mscUpdated.getNome(), mscUpdated.getTempoDuracao()));
+                return ResponseEntity.ok().body(service.convertMusicaToDTO(mscUpdated));
             return ResponseEntity.notFound().build();
     }
 }

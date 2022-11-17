@@ -22,5 +22,7 @@ public interface ArtistaRepository extends JpaRepository<Artista, Long>{
 
     List<Artista> findByNomeIgnoreCase(String nome);
    
+    @Query("SELECT a FROM Artista a, Nacionalidade n WHERE  UPPER(a.nacionalidade.designacao) LIKE CONCAT('%',UPPER(:nacionalidade),'%')")
+    List<Artista> findByArtistaForNacionalidade(@Param("nacionalidade") String nacionalidade);
 }
 
