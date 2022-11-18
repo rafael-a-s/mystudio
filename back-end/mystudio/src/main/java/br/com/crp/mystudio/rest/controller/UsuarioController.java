@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.crp.mystudio.domain.model.usuario.Usuario;
@@ -29,6 +31,12 @@ public class UsuarioController{
 
     @Autowired
     private UsuarioRepository repository;
+
+    private final PasswordEncoder encoder;
+
+    UsuarioController(PasswordEncoder encoder){
+        this.encoder = encoder;
+    }
 
 
     @GetMapping
@@ -52,7 +60,7 @@ public class UsuarioController{
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public void saveEntity(@RequestBody CreateUsuarioDTO userDTO){
-        repository.save(new Usuario(userDTO));
+        repository.save(new Usuario(userDTO, encoder));
     }
 
     @DeleteMapping("/{id}")
@@ -77,4 +85,15 @@ public class UsuarioController{
             return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/valida")
+    public ResponseEntity<Boolean> validPassword(@RequestParam String email , @RequestParam String senha){
+        Optional<Usuario> optUSer = repository.findUsuarioByEmail(email);
+        if(optUSer.isEmpty())
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
+
+        boolean valid = encoder.matches(senha, optUSer.get().getSenha());
+
+        HttpStatus status = (valid) ? HttpStatus.OK : HttpStatus.UNAUTHORIZED;
+        return ResponseEntity.status(status).body(valid);
+    }
 }

@@ -66,7 +66,9 @@ public class MusicaController {
 
     @GetMapping("/findByArtista-{nome}")//funcionando
     public List<ResponseMuiscaDTO> findByArtista(@PathVariable String nome){
-        List<Musica> list = repository.findAllName(nome);
+        System.out.println("entrou1=================================================================");
+        List<Musica> list = repository.findAllMusicaByArtista(nome);
+        System.out.println("entrou2");
         List<ResponseMuiscaDTO> listResponse = new ArrayList<ResponseMuiscaDTO>();
         for(Musica m : list){
             ResponseMuiscaDTO response = service.convertMusicaToDTO(m);
