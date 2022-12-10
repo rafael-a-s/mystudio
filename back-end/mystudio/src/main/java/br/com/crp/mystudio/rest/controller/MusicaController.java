@@ -1,30 +1,20 @@
 package br.com.crp.mystudio.rest.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PutMapping;
-
 import br.com.crp.mystudio.domain.model.artista.Musica;
 import br.com.crp.mystudio.domain.repository.MusicaRepository;
-import br.com.crp.mystudio.rest.dto.album.UpdateAlbumDTO;
 import br.com.crp.mystudio.rest.dto.musica.CreateMusicaDTO;
 import br.com.crp.mystudio.rest.dto.musica.ResponseMuiscaDTO;
 import br.com.crp.mystudio.rest.dto.musica.UpdateMusicaDTO;
 import br.com.crp.mystudio.service.MusicaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/musica")
@@ -67,13 +57,10 @@ public class MusicaController {
     @GetMapping("/findByArtista-{nome}")//funcionando
     public List<ResponseMuiscaDTO> findByArtista(@PathVariable String nome){
         System.out.println("entrou1=================================================================");
-        List<Musica> list = repository.findAllMusicaByArtista(nome);
+
         System.out.println("entrou2");
         List<ResponseMuiscaDTO> listResponse = new ArrayList<ResponseMuiscaDTO>();
-        for(Musica m : list){
-            ResponseMuiscaDTO response = service.convertMusicaToDTO(m);
-            listResponse.add(response);
-        }
+
         return listResponse;
     }
 

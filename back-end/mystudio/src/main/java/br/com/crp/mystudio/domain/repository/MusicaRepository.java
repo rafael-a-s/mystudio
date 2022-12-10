@@ -18,8 +18,6 @@ public interface MusicaRepository extends JpaRepository<Musica, Long> {
     @Query("SELECT m FROM Musica m WHERE UPPER(m.nome) LIKE CONCAT('%',UPPER(:nome),'%')")
     public List<Musica> findAllName(@Param("nome") String nome);
 
-    @Query(nativeQuery = false, value = "SELECT DISTINCT m FROM Musica m, Artista a, musica_artistas ma WHERE m.id = ma.musica_id and a.id = ma.artistas_id and UPPER(a.nome) LIKE CONCAT('%',UPPER(:nome),'%')")
-    public List<Musica> findAllMusicaByArtista(@Param("nome") String nome);
 
 
 
