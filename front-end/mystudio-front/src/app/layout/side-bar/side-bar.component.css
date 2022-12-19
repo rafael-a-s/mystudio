@@ -1,15 +1,13 @@
 /*===Wrapper===*/
 .wrapper{
-  width: 100%;
+  width: 25%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
   background: #1f283e;
-
-
+  float: left;
 }
 /*===Title===*/
 .wrapper div {
