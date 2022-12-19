@@ -1,19 +1,10 @@
-<mat-grid-list cols="5" rowHeight="4:2">
+<app-header></app-header>
 
-  <mat-grid-tile [colspan]="5" style="background-color: #1a2035;">
-    <app-header></app-header>
-  </mat-grid-tile>
-  <mat-grid-tile [colspan]="1" [rowspan]="4">
-    <div class="container">
-      <app-side-bar></app-side-bar>
-    </div>
-  </mat-grid-tile>
-  <mat-grid-tile [colspan]="4" [rowspan]="4">
-    <div class="wrapper">
-      <router-outlet>
+<app-side-bar></app-side-bar>
 
-      </router-outlet>
-    </div>
-  </mat-grid-tile>
+<main>
+  <router-outlet>
 
-</mat-grid-list>
+  </router-outlet>
+</main>
+
