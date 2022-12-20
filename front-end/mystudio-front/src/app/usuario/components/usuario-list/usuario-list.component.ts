@@ -23,6 +23,7 @@ export class UsuarioListComponent implements OnInit {
     this.add.emit(true)
   }
   onEdit(user : Usuario){
+    console.log('usuario delete')
     this.edit.emit(user)
   }
   onDelete(user : Usuario){

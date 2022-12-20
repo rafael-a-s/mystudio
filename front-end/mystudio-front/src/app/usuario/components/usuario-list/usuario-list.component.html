@@ -1,8 +1,5 @@
-<h1>Ola mundo</h1>
 
 <mat-table  [dataSource]="user" >
-
-
 
   <ng-container matColumnDef="nome">
     <mat-header-cell  *matHeaderCellDef> Nome </mat-header-cell>
@@ -14,11 +11,10 @@
       <mat-cell *matCellDef="let user"> {{user.email}}
     </mat-cell>
   </ng-container>
-  <!-- Name Column -->
 
   <ng-container matColumnDef="acoes" >
     <mat-header-cell *matHeaderCellDef class="action-column-header">
-      <button mat-mini-fab color="primary" aria-label="adcionar um curso">
+      <button mat-mini-fab color="primary" aria-label="adcionar um usuário">
         <mat-icon (click)="onAdd()">add</mat-icon>
       </button>
     </mat-header-cell>
@@ -33,10 +29,8 @@
     </mat-cell>
   </ng-container>
 
-
-
-
-
   <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
+
+
