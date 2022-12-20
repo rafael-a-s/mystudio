@@ -2,7 +2,6 @@ package br.com.crp.mystudio.domain;
 
 import java.io.Serial;
 import java.io.Serializable;
-
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,7 +12,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
@@ -28,7 +26,7 @@ public class DefaultEntity implements Serializable {
 
     @EqualsAndHashCode.Include
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Version
@@ -36,7 +34,4 @@ public class DefaultEntity implements Serializable {
 
     private boolean active = true;
 
-
-    
-    
 }

@@ -1,0 +1,1 @@
+INSERT INTO usuario ( id, active, version, email, nome, senha) VALUES (1,true, 0, 'rafael@gmail.com', 'Rafael Aguiar Silva', '1234');
