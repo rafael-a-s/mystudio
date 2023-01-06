@@ -9,7 +9,8 @@ export class UsuarioService {
   constructor(private httpClient:HttpClient) { }
 
   cadastrarNovoUsuario(usuario : Usuario){
-    return this.httpClient.post<Usuario>('http://localhost:8080/api/usuario', usuario );
+    console.log(usuario)
+    return this.httpClient.post<Usuario>('api/usuario', usuario );
   }
 
 

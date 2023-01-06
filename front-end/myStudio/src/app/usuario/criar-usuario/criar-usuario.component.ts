@@ -27,6 +27,7 @@ export class CriarUsuarioComponent implements OnInit {
 
   cadastrar(){
     const usuario = this.novoUsuarioForm.getRawValue() as Usuario ;
+    console.log(usuario)
     this.usuarioService.cadastrarNovoUsuario(usuario).subscribe();
   }
 
