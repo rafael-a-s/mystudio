@@ -1,0 +1,20 @@
+<div class="container">
+  <form class="form mt-4" [formGroup]="novoUsuarioForm" (submit)="cadastrar()">
+    <div class="mb-3">
+      <label  class="form-label">Nome</label>
+      <input type="email" class="form-control"  placeholder="Nome" formControlName="nome">
+    </div>
+
+    <div class="mb-3">
+      <label  class="form-label">Email</label>
+      <input type="email" class="form-control"  placeholder="seu@email.com" formControlName="email">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Senha</label>
+      <input type="email" class="form-control"  placeholder="Senha" formControlName="senha">
+    </div>
+
+    <button class="btn btn-primary">Salvar</button>
+  </form>
+</div>
