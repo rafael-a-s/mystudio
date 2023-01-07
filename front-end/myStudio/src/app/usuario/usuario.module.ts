@@ -4,13 +4,15 @@ import { UsuarioComponent } from './usuario/usuario.component';
 import { CriarUsuarioComponent } from './criar-usuario/criar-usuario.component';
 import {UsuarioRoutingModule} from "./usuario-routing.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import { ListarUsuarioComponent } from './listar-usuario/listar-usuario.component';
 
 
 
 @NgModule({
   declarations: [
     UsuarioComponent,
-    CriarUsuarioComponent
+    CriarUsuarioComponent,
+    ListarUsuarioComponent
   ],
   imports: [
     CommonModule,

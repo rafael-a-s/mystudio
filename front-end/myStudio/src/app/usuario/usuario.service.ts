@@ -9,10 +9,13 @@ export class UsuarioService {
   private readonly API = 'api/usuario';
 
   constructor(private httpClient:HttpClient) { }
+
   cadastrarNovoUsuario(usuario : Usuario){
-    console.log(usuario)
     return this.httpClient.post<Usuario>(this.API, usuario );
   }
 
+  list(){
+    return this.httpClient.get<Usuario[]>(this.API);
+  }
 
 }
