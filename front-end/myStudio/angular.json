@@ -69,7 +69,8 @@
               "browserTarget": "myStudio:build:production"
             },
             "development": {
-              "browserTarget": "myStudio:build:development"
+              "browserTarget": "myStudio:build:development",
+              "proxyConfig": "proxy.conf.js"
             }
           },
           "defaultConfiguration": "development"

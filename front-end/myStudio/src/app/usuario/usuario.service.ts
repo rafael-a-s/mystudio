@@ -6,11 +6,12 @@ import {Usuario} from "./model/usuario";
 })
 export class UsuarioService {
 
-  constructor(private httpClient:HttpClient) { }
+  private readonly API = 'api/usuario';
 
+  constructor(private httpClient:HttpClient) { }
   cadastrarNovoUsuario(usuario : Usuario){
     console.log(usuario)
-    return this.httpClient.post<Usuario>('api/usuario', usuario );
+    return this.httpClient.post<Usuario>(this.API, usuario );
   }
 
 
