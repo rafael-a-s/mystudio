@@ -24,7 +24,7 @@ export class ListarUsuarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.usuarios$.subscribe()
   }
 
   apagarRegistro(user : Usuario){
