@@ -44,7 +44,7 @@ public class UsuarioController{
         List<Usuario> list = repository.findAllActive();
         List<ResponseUsuarioDTO> listResponse = new ArrayList<ResponseUsuarioDTO>();
         for(Usuario u : list){
-            ResponseUsuarioDTO response = new ResponseUsuarioDTO(u.getNome(), u.getEmail());
+            ResponseUsuarioDTO response = new ResponseUsuarioDTO(u.getId(), u.getNome(), u.getEmail());
             listResponse.add(response);
         }
         return listResponse;
@@ -53,7 +53,7 @@ public class UsuarioController{
     @GetMapping("/{id}")
     public ResponseEntity<ResponseUsuarioDTO> findById(@PathVariable Long id){
         return repository.findById(id)
-        .map(user -> ResponseEntity.ok().body(new ResponseUsuarioDTO(user.getNome(), user.getEmail())))
+        .map(user -> ResponseEntity.ok().body(new ResponseUsuarioDTO(user.getId() ,user.getNome(), user.getEmail())))
         .orElse(ResponseEntity.notFound().build());
     }
 
@@ -65,10 +65,12 @@ public class UsuarioController{
 
     @DeleteMapping("/{id}")
     public void inativar(@PathVariable Long id){
+        System.out.println(id);
         Optional<Usuario> u = repository.findById(id);
         if(u.get() != null){
             u.get().setActive(false);
             repository.save(u.get());
+            return;
         }
         System.out.println("Registo não encontrado.");
     }    

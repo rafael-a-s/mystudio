@@ -13,7 +13,8 @@ export class CriarUsuarioComponent implements OnInit {
 
   novoUsuarioForm!: FormGroup;
   constructor(private usuarioService:UsuarioService,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private routes: Router) { }
 
   ngOnInit(): void {
     this.novoUsuarioForm = this.formBuilder.group(
@@ -28,7 +29,11 @@ export class CriarUsuarioComponent implements OnInit {
   cadastrar(){
     const usuario = this.novoUsuarioForm.getRawValue() as Usuario ;
     console.log(usuario)
-    this.usuarioService.cadastrarNovoUsuario(usuario).subscribe();
+    this.usuarioService.cadastrarNovoUsuario(usuario)
+    .subscribe(
+      result => this.routes.navigateByUrl('listar-usuario'),
+      error => console.log(error)
+    );
   }
 
 }

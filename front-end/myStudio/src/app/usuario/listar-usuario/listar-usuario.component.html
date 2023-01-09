@@ -1,15 +1,22 @@
 <div class="container">
-    <table class="table table-dark table-hover">
+    <table class="table table-primary">
       <thead>
         <tr>
           <th scope="col">NOME</th>
           <th scope="col">EMAIL</th>
+          <th scope="col">AÇÃO</th>
+          <th scope="col"><a href="usuario/criar-usuario">NOVO</a></th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let user of usuarios | async">
+      <tbody class="table-group-divider">
+        <tr *ngFor="let user of usuarios$ | async">
           <td>{{user.nome}}</td>
           <td>{{user.email}}</td>
+          <td>
+            <button class="btn btn-primary me-2">Editar</button>
+            <button class="btn btn-primary" (click)="apagarRegistro(user)" >Apagar</button>
+          </td>
+          <td></td>
         </tr>
       </tbody>
     </table>
